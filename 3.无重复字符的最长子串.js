@@ -11,19 +11,18 @@
  */
 var lengthOfLongestSubstring = function(s) {
   var len = s.length;
-  if (len < 2) return len; 
   var p1 = -1;
   var max = 0;
-  var charMap = {};
+  var charMap = new Map();
 
   for (var i = 0; i < len; i++ ) {
     var char = s[i];
-    var charIndedx = charMap[char];
-    if (charIndedx === undefined) {
-      charMap[char] = i;
+    var repeatIdx = charMap.get(char);
+    if (!charMap.has(char)) {
+      charMap.set(char, i);
     } else {
-      if (charIndedx > p1) p1 = charIndedx;
-      charMap[char] = i;
+      if (repeatIdx > p1) p1 = repeatIdx;
+      charMap.set(char, i);
     }
 
     var nextMax = i - p1;
