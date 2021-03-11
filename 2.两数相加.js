@@ -23,6 +23,7 @@ var addTwoNumbers = function(l1, l2) {
   var l2Point = l2;
   var newList = new ListNode(0, null);
   var point = newList;
+  var flag = false;
 
   while (l1Point || l2Point) {
     var l1Val = l1Point ? l1Point.val : 0;
@@ -35,12 +36,19 @@ var addTwoNumbers = function(l1, l2) {
 
     if (l1Point) l1Point = l1Point.next;
     if (l2Point) l2Point = l2Point.next;
+
     point.next = new ListNode(0, null);
-    point = point.next;
+    if (l1Point || l2Point) {
+      point = point.next;
+    }
   }
 
-  if (flag) point.val = 1;
+  if (flag) {
+    point.next.val = 1;
+  } else {
+    point.next = null;
+  }
 
-  return l1;
+  return newList;
 };
 // @lc code=end
