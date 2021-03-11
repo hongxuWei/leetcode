@@ -97,26 +97,18 @@
 var romanToInt = function(s) {
   const tokenMap = {
     I: 1,
+    IV: 4,
     V: 5,
+    IX: 9,
     X: 10,
+    XL: 40,
     L: 50,
+    XC: 90,
     C: 100,
+    CD: 400,
     D: 500,
+    CM: 900,
     M: 1000,
-  };
-  const spec = {
-    I: {
-      IV: 4,
-      IX: 9,
-    },
-    X: {
-      XL: 40,
-      XC: 90,
-    },
-    C: {
-      CD: 400,
-      CM: 900,
-    }
   };
   /**
    * I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
@@ -126,16 +118,14 @@ var romanToInt = function(s) {
   const len = s.length;
   let total = 0;
   for (let i = 0; i < len; i++) {
-    const char = s.charAt(i);
-    if (spec[char]) {
-      const batch = char + s.charAt(i + 1);
-      if (spec[char][batch]) {
-        total += spec[char][batch];
-        i++;
-        continue;
-      }
+    const char = s[i];
+    const nextChar = s[i + 1];
+    if (tokenMap[char] < tokenMap[nextChar]) {
+      total += tokenMap[char + nextChar];
+      i++;
+    } else {
+      total += tokenMap[char];
     }
-    total += tokenMap[char];
   }
   return total;
 };
