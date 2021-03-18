@@ -82,18 +82,17 @@
  */
 var inorderTraversal = function(root) {
   const result = [];
-  if (root === null) return result;
-  let current = root;
   const stack = [];
+  let current = root;
   while (stack.length || current !== null) {
-    while (current !== null) {
+    if (current) {
       stack.push(current);
       current = current.left;
+    } else {
+      current = stack.pop();
+      result.push(current.val);
+      current = current.right;
     }
-
-    current = stack.pop();
-    result.push(current.val);
-    current = current.right;
   }
   return result;
 };
