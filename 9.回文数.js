@@ -69,24 +69,14 @@
  * @return {boolean}
  */
 var isPalindrome = function(x) {
-  if (x < 0) return false;
-  if (x < 10) return true;
-  const tokens = [];
-  while (x) {
-    const num = x % 10;
-    const leftNum = x - num;
-    x = leftNum / 10;
-    tokens.unshift(num);
+  if (x < 0 || (x % 10 === 0 && x !== 0)) return false;
+  let revertNumber = 0;
+  while (x > revertNumber) {
+    revertNumber = (revertNumber * 10) + (x % 10);
+    x = ~~(x/10);
   }
-  while (tokens.length) {
-    const n1 = tokens.shift();
-    const n2 = tokens.pop();
-    if (n1 === undefined || n2 === undefined) {
-      break;
-    }
-    if (n1 !== n2) return false;
-  }
-  return true;
+
+  return x === revertNumber || x === ~~(revertNumber/10);
 };
 // @lc code=end
 
