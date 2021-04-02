@@ -76,17 +76,20 @@
  */
 var removeDuplicates = function(nums) {
   const len = nums.length;
-  if (len < 1) return len;
-
-  let point = 0;
-  for (let i = 1; i < len; i++) {
-    if (nums[point] != nums[i]) {
-      point++;
-      nums[point] = nums[i]
+  let point = 1;
+  let resultPoint = 0;
+  while (point < len) {
+    if (nums[point] !== nums[resultPoint]) {
+      resultPoint++;
+      if (point !== resultPoint) {
+        nums[resultPoint] = nums[point];
+      }
     }
+
+    point++;
   }
 
-  return point + 1;
+  return resultPoint + 1;
 };
 // @lc code=end
 
