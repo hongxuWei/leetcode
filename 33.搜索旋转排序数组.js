@@ -69,9 +69,6 @@
  */
 var search = function(nums, target) {
   const len = nums.length;
-  const NOT_FOUND = -1;
-  if (len === 0) return NOT_FOUND;
-  if (len === 1) return nums[0] === target ? 0 : NOT_FOUND;
   let left = 0;
   let right = len - 1;
   while (left <= right) {
@@ -94,7 +91,7 @@ var search = function(nums, target) {
       }
     }
   }
-  return NOT_FOUND;
+  return -1;
 };
 // @lc code=end
 
